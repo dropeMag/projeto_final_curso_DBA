@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS tb_telefone_professor(
     id_professor INTEGER NOT NULL,
     id_tipo_telefone INTEGER NOT NULL,
 CONSTRAINT pk_id_telefone_professor
-	PRIMARY KEY (id_),
+	PRIMARY KEY (id_telefone),
 CONSTRAINT fk_id_professor_telefone
     FOREIGN KEY (id_professor)
     REFERENCES tb_professor (id_professor),
@@ -209,11 +209,8 @@ CONSTRAINT fk_tipo_telefone_aluno
 
 CREATE TABLE IF NOT EXISTS tb_disciplina_disciplina(
     id_disciplina_1 INTEGER NOT NULL,
-    id_disciplina_1 INTEGER NOT NULL,
-CONSTRAINT pk_id_disciplina_1
-	PRIMARY KEY (id_disciplina),
-CONSTRAINT pk_id_disciplina_2
-	PRIMARY KEY (id_disciplina),
+    id_disciplina_2 INTEGER NOT NULL,
+PRIMARY KEY (id_disciplina_1, id_disciplina_2),
 CONSTRAINT fk_disciplina_1_assoc_disciplina
     FOREIGN KEY (id_disciplina_1)
     REFERENCES tb_disciplina (id_disciplina),
@@ -225,10 +222,7 @@ CONSTRAINT fk_disciplina_2_assoc_disciplina
 CREATE TABLE IF NOT EXISTS tb_disciplina_curso(
     id_disciplina INTEGER NOT NULL,
     id_curso INTEGER NOT NULL,
-CONSTRAINT pk_id_disciplina
-	PRIMARY KEY (id_disciplina),
-CONSTRAINT pk_id_curso
-	PRIMARY KEY (id_curso),
+PRIMARY KEY(id_disciplina, id_curso),
 CONSTRAINT fk_disciplina_assoc_curso
     FOREIGN KEY (id_disciplina)
     REFERENCES tb_disciplina (id_disciplina),
@@ -242,10 +236,7 @@ CREATE TABLE IF NOT EXISTS tb_disciplina_historico(
     id_disciplina INTEGER NOT NULL,
     frequencia FLOAT NOT NULL,
     nota FLOAT NOT NULL,
-CONSTRAINT pk_id_historico
-	PRIMARY KEY (id_historico),
-CONSTRAINT pk_id_disciplina
-	PRIMARY KEY (id_disciplina),
+PRIMARY KEY(id_historico, id_disciplina),
 CONSTRAINT fk_id_historico_assoc_disciplina
     FOREIGN KEY (id_historico)
     REFERENCES tb_historico (id_historico),
@@ -257,10 +248,7 @@ CONSTRAINT fk_disciplina_assoc_historico
 CREATE TABLE IF NOT EXISTS tb_disciplina_professor(
     id_professor INTEGER NOT NULL,
     id_disciplina INTEGER NOT NULL,
-CONSTRAINT pk_id_professor
-	PRIMARY KEY (id_professor),
-CONSTRAINT pk_id_disciplina
-	PRIMARY KEY (id_disciplina),
+PRIMARY KEY(id_professor, id_disciplina),
 CONSTRAINT fk_professor_assoc_disciplina
     FOREIGN KEY (id_professor)
     REFERENCES tb_professor (id_professor),
@@ -272,10 +260,7 @@ CONSTRAINT fk_disciplina_assoc_professor
 CREATE TABLE IF NOT EXISTS tb_disciplina_aluno(
     id_aluno INTEGER NOT NULL,
     id_disciplina INTEGER NOT NULL,
-CONSTRAINT pk_id_aluno
-	PRIMARY KEY (id_aluno),
-CONSTRAINT pk_id_disciplina
-	PRIMARY KEY (id_disciplina),
+PRIMARY KEY(id_aluno, id_disciplina),
 CONSTRAINT fk_aluno_assoc_disciplina
     FOREIGN KEY (id_aluno)
     REFERENCES tb_aluno (id_aluno),
