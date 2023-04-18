@@ -1,0 +1,285 @@
+CREATE DATABASE IF NOT EXISTS db_faculdade_senai
+COLLATE utf8mb4_general_ci
+CHARSET utf8mb4;
+
+USE db_faculdade_senai;
+
+CREATE TABLE IF NOT EXISTS tb_tipo_telefone(
+    id_tipo_telefone INTEGER AUTO_INCREMENT,
+    descricao VARCHAR(255) NOT NULL,
+CONSTRAINT pk_tipo_telefone
+	PRIMARY KEY (id_tipo_telefone)
+);
+
+CREATE TABLE IF NOT EXISTS tb_tipo_logradouro(
+    id_logradouro INTEGER AUTO_INCREMENT,
+    descricao VARCHAR(50) NOT NULL,
+CONSTRAINT pk_id_logradouro
+	PRIMARY KEY (id_logradouro)
+);
+
+CREATE TABLE IF NOT EXISTS tb_periodo(
+    id_periodo INTEGER AUTO_INCREMENT,
+    semestre INTEGER,
+    ano INTEGER,
+CONSTRAINT pk_id_periodo
+	PRIMARY KEY (id_periodo)
+);
+
+CREATE TABLE IF NOT EXISTS tb_departamento(
+    id_departamento INTEGER AUTO_INCREMENT,
+    nome VARCHAR(30) NOT NULL,
+    responsavel VARCHAR(50) NOT NULL,
+CONSTRAINT pk_id_departamento
+	PRIMARY KEY (id_departamento)
+);
+
+CREATE TABLE IF NOT EXISTS tb_disciplina(
+    id_disciplina INTEGER AUTO_INCREMENT,
+    nome VARCHAR(50),
+    carga_horaria INTEGER NOT NULL,
+    creditos INTEGER NOT NULL,
+    descricao VARCHAR(255) NOT NULL,
+    optativa BOOLEAN NOT NULL,
+    qnt_aluno INTEGER NOT NULL,
+    id_departamento INTEGER NOT NULL,
+CONSTRAINT pk_id_disciplina
+	PRIMARY KEY (id_disciplina),
+CONSTRAINT fk_id_departamento_disciplina
+    FOREIGN KEY (id_departamento)
+    REFERENCES tb_departamento (id_departamento)
+);
+
+CREATE TABLE IF NOT EXISTS tb_curso(
+    id_curso INTEGER AUTO_INCREMENT,
+    nome VARCHAR(30) NOT NULL,
+    sigla VARCHAR(5) NOT NULL UNIQUE,
+    carga_horaria INTEGER NOT NULL,
+    id_departamento INTEGER NOT NULL,
+CONSTRAINT pk_id_curso
+	PRIMARY KEY (id_curso),
+CONSTRAINT fk_id_departamento_curso
+    FOREIGN KEY (id_departamento)
+    REFERENCES tb_departamento (id_departamento)
+);
+
+CREATE TABLE IF NOT EXISTS tb_turma(
+    id_turma INTEGER AUTO_INCREMENT,
+    qnt_aluno INTEGER NOT NULL,
+    turno CHAR(1) NOT NULL,
+    id_periodo INTEGER NOT NULL,
+    id_curso INTEGER NOT NULL,
+CONSTRAINT pk_turma
+	PRIMARY KEY (id_turma),
+CONSTRAINT fk_id_curso_turma
+    FOREIGN KEY (id_curso)
+    REFERENCES tb_Curso (id_curso),
+CONSTRAINT fk_id_periodo_turma
+    FOREIGN KEY (id_periodo)
+    REFERENCES tb_Periodo (id_periodo)
+);
+
+CREATE TABLE IF NOT EXISTS tb_historico(
+    id_historico INTEGER AUTO_INCREMENT,
+    semestre INTEGER NOT NULL,
+    dt_inicio INTEGER NOT NULL,
+    dt_fim INTEGER,
+    turno CHAR(1) NOT NULL,
+CONSTRAINT pk_id_historico
+	PRIMARY KEY (id_historico),
+CONSTRAINT fk_dt_inicio_historico
+    FOREIGN KEY (dt_inicio)
+    REFERENCES tb_periodo (id_periodo),
+CONSTRAINT fk_dt_fim_historico
+    FOREIGN KEY (dt_fim)
+    REFERENCES tb_periodo (id_periodo)
+);
+
+CREATE TABLE IF NOT EXISTS tb_professor(
+    id_professor INTEGER AUTO_INCREMENT,
+    nome VARCHAR(20) NOT NULL,
+    sobrenome VARCHAR(60) NOT NULL,
+    cpf CHAR(14) NOT NULL UNIQUE,
+    rg INTEGER NOT NULL,
+    dt_nascimento DATE NOT NULL,
+    sexo CHAR(1) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    status BOOLEAN NOT NULL,
+    id_departamento INTEGER NOT NULL,
+CONSTRAINT pk_id_professor
+	PRIMARY KEY (id_professor),
+CONSTRAINT fk_id_departamento_professor
+    FOREIGN KEY (id_departamento)
+    REFERENCES tb_departamento (id_departamento)
+);
+
+CREATE TABLE IF NOT EXISTS tb_telefone_professor(
+    id_telefone INTEGER AUTO_INCREMENT,
+    ddd CHAR(2) NOT NULL,
+    numero VARCHAR(9) NOT NULL,
+    id_professor INTEGER NOT NULL,
+    id_tipo_telefone INTEGER NOT NULL,
+CONSTRAINT pk_id_telefone_professor
+	PRIMARY KEY (id_),
+CONSTRAINT fk_id_professor_telefone
+    FOREIGN KEY (id_professor)
+    REFERENCES tb_professor (id_professor),
+CONSTRAINT fk_tipo_telefone_professor
+    FOREIGN KEY (id_tipo_telefone)
+    REFERENCES tb_tipo_telefone (id_tipo_telefone)
+);
+
+CREATE TABLE IF NOT EXISTS tb_endereco_aluno(
+    id_endereco INTEGER AUTO_INCREMENT,
+    cep CHAR(11) NOT NULL,
+    cidade VARCHAR(80) NOT NULL,
+    bairro VARCHAR(80) NOT NULL,
+    numero INTEGER NOT NULL,
+    complemento VARCHAR(50),
+    id_logradouro INTEGER NOT NULL,
+CONSTRAINT pk_id_endereco_aluno
+	PRIMARY KEY (id_endereco),
+CONSTRAINT fk_id_logradouro_aluno
+    FOREIGN KEY (id_logradouro)
+    REFERENCES tb_tipo_logradouro (id_logradouro)
+);
+
+CREATE TABLE IF NOT EXISTS tb_aluno(
+    id_aluno INTEGER AUTO_INCREMENT,
+    nome VARCHAR(20) NOT NULL,
+    sobrenome VARCHAR(60) NOT NULL,
+    cpf CHAR(14) NOT NULL UNIQUE,
+    rg INTEGER NOT NULL,
+    dt_nascimento DATE NOT NULL,
+    sexo CHAR(1) NOT NULL,
+    email VARCHAR(60) NOT NULL,
+    mae VARCHAR(60),
+    pai VARCHAR(60),
+    status BOOLEAN NOT NULL,
+    id_curso INTEGER NOT NULL,
+    id_turma INTEGER NOT NULL,
+    id_endereco INTEGER NOT NULL,
+CONSTRAINT pk_id_aluno
+	PRIMARY KEY (id_aluno),
+CONSTRAINT fk_id_endereco_aluno
+    FOREIGN KEY (id_endereco)
+    REFERENCES tb_endereco_aluno (id_endereco),
+CONSTRAINT fk_id_turma_aluno
+    FOREIGN KEY (id_turma)
+    REFERENCES tb_turma (id_turma),
+CONSTRAINT fk_id_curso_aluno
+    FOREIGN KEY (id_curso)
+    REFERENCES tb_curso (id_curso)
+);
+
+CREATE TABLE IF NOT EXISTS tb_endereco_professor(
+    id_endereco INTEGER AUTO_INCREMENT,
+    cep CHAR(11) NOT NULL,
+    cidade VARCHAR(80) NOT NULL,
+    bairro VARCHAR(80) NOT NULL,
+    numero INTEGER NOT NULL,
+    complemento VARCHAR(80),
+    id_logradouro INTEGER NOT NULL,
+    id_professor INTEGER NOT NULL,
+CONSTRAINT pk_id_endereco_professor
+	PRIMARY KEY (id_endereco),
+CONSTRAINT fk_id_logradouro_professor
+    FOREIGN KEY (id_logradouro)
+    REFERENCES tb_tipo_logradouro (id_logradouro),
+CONSTRAINT fk_id_professor_professor
+    FOREIGN KEY (id_professor)
+    REFERENCES tb_professor (id_professor)
+);
+
+CREATE TABLE IF NOT EXISTS tb_telefone_aluno(
+    id_telefone INTEGER AUTO_INCREMENT,
+    ddd CHAR(2) NOT NULL,
+    numero VARCHAR(9) NOT NULL,
+    id_aluno INTEGER NOT NULL,
+    id_tipo_telefone INTEGER NOT NULL,
+CONSTRAINT pk_id_telefone_aluno
+	PRIMARY KEY (id_telefone),
+CONSTRAINT fk_id_aluno_telefone
+    FOREIGN KEY (id_aluno)
+    REFERENCES tb_aluno (id_aluno),
+CONSTRAINT fk_tipo_telefone_aluno
+    FOREIGN KEY (id_tipo_telefone)
+    REFERENCES tb_tipo_telefone (id_tipo_telefone)
+);
+
+CREATE TABLE IF NOT EXISTS tb_disciplina_disciplina(
+    id_disciplina_1 INTEGER NOT NULL,
+    id_disciplina_1 INTEGER NOT NULL,
+CONSTRAINT pk_id_disciplina_1
+	PRIMARY KEY (id_disciplina),
+CONSTRAINT pk_id_disciplina_2
+	PRIMARY KEY (id_disciplina),
+CONSTRAINT fk_disciplina_1_assoc_disciplina
+    FOREIGN KEY (id_disciplina_1)
+    REFERENCES tb_disciplina (id_disciplina),
+CONSTRAINT fk_disciplina_2_assoc_disciplina
+    FOREIGN KEY (id_disciplina_2)
+    REFERENCES tb_disciplina (id_disciplina)
+);
+
+CREATE TABLE IF NOT EXISTS tb_disciplina_curso(
+    id_disciplina INTEGER NOT NULL,
+    id_curso INTEGER NOT NULL,
+CONSTRAINT pk_id_disciplina
+	PRIMARY KEY (id_disciplina),
+CONSTRAINT pk_id_curso
+	PRIMARY KEY (id_curso),
+CONSTRAINT fk_disciplina_assoc_curso
+    FOREIGN KEY (id_disciplina)
+    REFERENCES tb_disciplina (id_disciplina),
+CONSTRAINT fk_curso_assoc_disciplina
+    FOREIGN KEY (id_curso)
+    REFERENCES tb_curso (id_curso)
+);
+
+CREATE TABLE IF NOT EXISTS tb_disciplina_historico(
+    id_historico INTEGER NOT NULL,
+    id_disciplina INTEGER NOT NULL,
+    frequencia FLOAT NOT NULL,
+    nota FLOAT NOT NULL,
+CONSTRAINT pk_id_historico
+	PRIMARY KEY (id_historico),
+CONSTRAINT pk_id_disciplina
+	PRIMARY KEY (id_disciplina),
+CONSTRAINT fk_id_historico_assoc_disciplina
+    FOREIGN KEY (id_historico)
+    REFERENCES tb_historico (id_historico),
+CONSTRAINT fk_disciplina_assoc_historico
+    FOREIGN KEY (id_disciplina)
+    REFERENCES tb_disciplina (id_disciplina)
+);
+
+CREATE TABLE IF NOT EXISTS tb_disciplina_professor(
+    id_professor INTEGER NOT NULL,
+    id_disciplina INTEGER NOT NULL,
+CONSTRAINT pk_id_professor
+	PRIMARY KEY (id_professor),
+CONSTRAINT pk_id_disciplina
+	PRIMARY KEY (id_disciplina),
+CONSTRAINT fk_professor_assoc_disciplina
+    FOREIGN KEY (id_professor)
+    REFERENCES tb_professor (id_professor),
+CONSTRAINT fk_disciplina_assoc_professor
+    FOREIGN KEY (id_disciplina)
+    REFERENCES tb_disciplina (id_disciplina)
+);
+
+CREATE TABLE IF NOT EXISTS tb_disciplina_aluno(
+    id_aluno INTEGER NOT NULL,
+    id_disciplina INTEGER NOT NULL,
+CONSTRAINT pk_id_aluno
+	PRIMARY KEY (id_aluno),
+CONSTRAINT pk_id_disciplina
+	PRIMARY KEY (id_disciplina),
+CONSTRAINT fk_aluno_assoc_disciplina
+    FOREIGN KEY (id_aluno)
+    REFERENCES tb_aluno (id_aluno),
+CONSTRAINT fk_disciplina_assoc_aluno
+    FOREIGN KEY (id_disciplina)
+    REFERENCES tb_disciplina (id_disciplina)
+);
