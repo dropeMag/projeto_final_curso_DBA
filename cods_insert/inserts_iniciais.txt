@@ -1,0 +1,268 @@
+INSERT INTO tb_tipo_telefone
+	(descricao)
+VALUES
+	('celular'),
+	('fixo');
+
+
+INSERT INTO tb_tipo_logradouro
+	(descricao)
+VALUES
+	('alameda'),
+	('avenida'),
+	('baixa'),
+	('ciclovia'),
+	('comunidade'),
+	('distrito'),
+	('esplanada'),
+	('fazenda'),
+	('lago'),
+	('ponta');
+
+
+INSERT INTO tb_periodo
+	(semestre, ano)
+VALUES
+	(1, 2023),
+	(2, 2022),
+	(1, 2022),
+	(2, 2021),
+	(1, 2021),
+	(2, 2020),
+	(1, 2020),
+	(2, 2019),
+	(1, 2019),
+	(2, 2018),
+	(1, 2018);
+
+
+INSERT INTO tb_departamento
+	(nome, responsavel)
+VALUES
+	('Administração e Economia', 'Bruno Fernandes Goncalves'),
+	('Ciências Sociais', 'Estevan Costa Almeida'),
+	('Comunicação e Mídia', 'Nicolas Rocha Cunha'),
+	('Design e Arte', 'Eduardo Gomes Carvalho'),
+	('Direito', 'Eduarda Castro Costa'),
+	('Educação', 'Marina Martins Santos'),
+	('Engenharia e Arquitetura', 'Rodrigo Gomes Cavalcanti'),
+	('Informação e Tecnologia', 'Giovanna Carvalho Oliveira'),
+	('Saúde', 'Renan Rodrigues Barros'),
+	('Turismo e Gastronomia', 'Lavinia Sousa Cavalcanti');
+
+
+INSERT INTO tb_disciplina
+	(nome, carga_horaria, creditos, descricao, optativa, qnt_aluno, id_departamento)
+VALUES
+	('Semeação Básica', 65, 12, '', 0, 0, 1),
+	('Evolução Humana', 55, 12, '', 0, 0, 2),
+	('Comunicação Popular', 45, 14, '', 0, 0, 3),
+	('Edição Profissional', 45, 16, '', 0, 0, 4),
+	('Defesa Criminal', 30, 25, '', 1, 0, 5),
+	('Cálculos Avançados 2', 45, 16, '', 0, 0, 6),
+	('Escavação 2', 35, 19, '', 0, 0, 7),
+	('Big Data', 60, 20, '', 0, 0, 8),
+	('Fisioculturismo', 40, 23, '', 1, 0, 9),
+	('Vinhos e Queijos', 55, 21, '', 0, 0, 10);
+
+
+INSERT INTO tb_curso
+	(nome, sigla, carga_horaria, id_departamento)
+VALUES
+	('Agronegócio', 'AGN', 1200, 1),
+	('Antropologia', 'ATP', 1100, 2),
+	('Jornalismo', 'JNL', 1400, 3),
+	('Fotografia', 'FTG', 1200, 4),
+	('Direito', 'DRT', 1300, 5),
+	('Matemática', 'MTM', 1100, 6),
+	('Arqueologia', 'AQL', 1250, 7),
+	('Engenharia de Software', 'EGNST', 1300, 8),
+	('Fisioterapia', 'FST', 1220, 9),
+	('Hotelaria', 'HTL', 1400, 10);
+
+
+INSERT INTO tb_turma
+	(qnt_aluno, turno, id_periodo, id_curso)
+VALUES
+	(0, 'm', 1, 1),
+	(0, 'v', 2, 2),
+	(0, 'n', 3, 3),
+	(0, 'm', 4, 4),
+	(0, 'v', 5, 5),
+	(0, 'n', 6, 6),
+	(0, 'm', 7, 7),
+	(0, 'v', 8, 8),
+	(0, 'n', 9, 9),
+	(0, 'm', 10, 10);
+
+
+INSERT INTO tb_historico
+	(semestre, dt_inicio, turno)
+VALUES
+	(2, 1, 'm'),
+	(3, 2, 'v'),
+	(4, 3, 'n'),
+	(5, 4, 'm'),
+	(6, 5, 'v'),
+	(7, 6, 'n'),
+	(8, 7, 'm'),
+	(9, 8, 'v'),
+	(10, 9, 'n'),
+	(11, 10, 'm');
+
+
+INSERT INTO tb_professor
+	(nome, sobrenome, cpf, rg, dt_nascimento, sexo, email, status, id_departamento)
+VALUES
+	('Enrico', 'Rodrigues', '987.756.960-45', 9785417, '1983-12-20', 'm', 'fulano@gmail.com', 1, 1),
+	('Cecília', 'Mendes', '896.078.950-02', 8299161, '1994-03-12', 'f', 'beltrano@gmail.com', 1, 2),
+	('Carlos', 'da Rocha', '505.059.690-41', 6626527, '1984-09-24', 'm', 'sicrano@gmail.com', 0, 3),
+	('Evelyn', 'Mendes', '552.937.020-92', 6721478, '2001-05-20', 'f', 'deltrano@gmail.com', 1, 4),
+	('Eduardo', 'Barbosa', '440.842.020-45', 8279411, '1984-10-16', 'm', 'rolando@gmail.com', 1, 5),
+	('Ana Clara', 'Souza', '339.427.050-10', 6925643, '2000-11-18', 'f', 'fuxicando@gmail.com', 1, 6),
+	('Nathan', 'da Mota', '447.673.780-36', 2730565, '1987-11-12', 'm', 'zombando@gmail.com', 0, 7),
+	('Evelyn', 'Cunha', '366.045.970-40', 5780654, '1989-05-10', 'f', 'montando@gmail.com', 1, 8),
+	('Lucca', 'Rodrigues', '887.826.590-01', 2526558, '1985-06-12', 'm', 'jogando@gmail.com', 1, 9),
+	('Ana Vitória', 'Farias', '470.839.380-67', 6366502, '1998-02-08', 'f', 'carlos@gmail.com', 0, 10);
+
+
+INSERT INTO tb_telefone_professor
+	(ddd, numero, id_professor, id_tipo_telefone)
+VALUES
+	('61', '993167237', 1, 1),
+	('62', '973620584', 2, 1),
+	('63', '973849573', 3, 1),
+	('64', '984736215', 4, 1),
+	('81', '983732261', 5, 1),
+	('82', '995848372', 6, 1),
+	('72', '994984832', 7, 1),
+	('93', '998048272', 8, 1),
+	('92', '999825167', 9, 1),
+	('64', '998373621', 10, 1);
+
+
+INSERT INTO tb_endereco_aluno
+	(cep, cidade, bairro, numero, complemento, id_logradouro)
+VALUES
+	('13267379', 'Ceilândia', 'Sul', 11, NULL, 1),
+	('72983202', 'Ceilândia', 'Norte', 12, NULL, 2),
+	('21004486', 'Ceilândia', 'Leste', 13, 'Sul', 3),
+	('76693300', 'Ceilândia', 'Psul', 14, NULL, 4),
+	('71858705', 'Ceilândia', 'Pnorte', 15, '24 andar', 5),
+	('90588411', 'Ceilândia', 'Sol Nascente', 16, NULL, 6),
+	('17786534', 'Ceilândia', 'Centro', 17, 'Apt. 32', 7),
+	('22918906', 'Taguatinga', 'Norte', 18, NULL, 8),
+	('81634136', 'Taguatinga', 'Sul', 19, NULL, 9),
+	('84173132', 'Taguatinga', 'Pistão Sul', 20, NULL, 10);
+
+
+INSERT INTO tb_aluno
+	(nome, sobrenome, cpf, rg, dt_nascimento, sexo, email, mae, pai, status, id_curso, id_turma, id_endereco)
+VALUES
+	('Igor', 'da Paz', '096.500.320-53', 8014583, '2004-02-18', 'm', 'ouro@gmail.com', 'Isabel Mendes', 'João Pedro Gomes', 1, 1, 1, 1),
+	('Lavínia', 'Barbosa', '855.150.680-33', 5327815, '2002-04-20', 'f', 'pedra@gmail.com', 'Maria Julia Barros', 'Davi Lucas Carvalho', 0, 2, 2, 2),
+	('Davi', 'Jesus', '279.364.260-60', 8804016, '1988-01-17', 'm', 'agua@gmail.com', 'Sophia da Costa', 'Lorenzo Novaes', 1, 3, 3, 3),
+	('Lavínia', 'Conceição', '272.939.010-38', 1484020, '2000-10-04', 'f', 'terra@gmail.com', 'Giovanna Santos', 'Ryan Farias', 1, 4, 4, 4),
+	('Yuri', 'Santos', '741.968.840-08', 1664466, '1986-01-24', 'm', 'fogo@gmail.com', 'Sophia Nunes', NULL, 1, 5, 5, 5),
+	('Yasmin', 'Vieira', '628.154.920-16', 9413536, '1999-01-30', 'f', 'ar@gmail.com', 'Ana Sophia Aragão', 'Erick Aragão', 1, 6, 6, 6),
+	('Enrico', 'Castro', '682.662.260-24', 6701205, '2001-02-07', 'm', 'eter@gmail.com', NULL, 'João Lucas Campos', 0, 7, 7, 7),
+	('Luiza', 'Aragão', '955.259.310-79', 8334354, '2003-09-02', 'f', 'eterno@gmail.com', 'Stella Farias', NULL, 1, 8, 8, 8),
+	('Luiz', 'Carla', '529.270.480-61', 4906262, '2003-02-17', 'm', 'cura@gmail.com', NULL, 'Henrique Pires', 1, 9, 9, 9),
+	('Heloísa', 'Novaes', '873.455.520-04', 5288891, '1996-09-22', 'f', 'homunculos@gmail.com', 'Manuela Viana', NULL, 0, 10, 10, 10);
+
+
+INSERT INTO tb_endereco_professor
+	(cep, cidade, bairro, numero, complemento, id_logradouro, id_professor)
+VALUES
+	('22673798', 'Ceilândia', 'Sul', 11, NULL, 1, 1),
+	('94832062', 'Ceilândia', 'Norte', 12, NULL, 2, 2),
+	('56044486', 'Ceilândia', 'Leste', 13, 'Sul', 3, 3),
+	('68933300', 'Ceilândia', 'Psul', 14, NULL, 4, 4),
+	('89568705', 'Ceilândia', 'Pnorte', 15, '24 andar', 5, 5),
+	('56488411', 'Ceilândia', 'Sol Nascente', 16, NULL, 6, 6),
+	('74586534', 'Ceilândia', 'Centro', 17, 'Apt. 32', 7, 7),
+	('93518906', 'Taguatinga', 'Norte', 18, NULL, 8, 8),
+	('75634136', 'Taguatinga', 'Sul', 19, NULL, 9, 9),
+	('13573132', 'Taguatinga', 'Pistão Sul', 20, NULL, 10, 10);
+
+
+INSERT INTO tb_telefone_aluno
+	(ddd, numero, id_aluno, id_tipo_telefone)
+VALUES
+	('61', '916472377', 1, 1),
+	('62', '962055814', 2, 1),
+	('63', '984953735', 3, 1),
+	('64', '973654215', 4, 1),
+	('81', '973242261', 5, 1),
+	('82', '984283742', 6, 1),
+	('72', '997784832', 7, 1),
+	('93', '906448272', 8, 1),
+	('92', '983225167', 9, 1),
+	('64', '932753621', 10, 1);
+
+
+INSERT INTO tb_disciplina_disciplina
+	(id_disciplina_1, id_disciplina_2)
+VALUES
+	(1, 3),
+	(2, 7);
+
+
+INSERT INTO tb_disciplina_curso
+	(id_disciplina, id_curso)
+VALUES
+	(1, 1),
+	(2, 2),
+	(3, 3),
+	(4, 4),
+	(5, 5),
+	(6, 6),
+	(7, 7),
+	(8, 8),
+	(9, 9),
+	(10, 10);
+
+
+INSERT INTO tb_disciplina_historico
+	(id_historico, id_disciplina, frequencia, nota)
+VALUES
+	(1, 1, 87, 9.0),
+	(2, 2, 98, 8.0),
+	(3, 3, 100, 9.6),
+	(4, 4, 65, 6.25),
+	(5, 5, 78, 7.5),
+	(6, 6, 85, 8.7),
+	(7, 7, 98, 9.9),
+	(8, 8, 78, 7.6),
+	(9, 9, 90, 8.6),
+	(10, 10, 100, 10);
+
+
+INSERT INTO tb_disciplina_professor
+	(id_professor, id_disciplina)
+VALUES
+	(1, 1),
+	(2, 2),
+	(3, 3),
+	(4, 4),
+	(5, 5),
+	(6, 6),
+	(7, 7),
+	(8, 8),
+	(9, 9),
+	(10, 10);
+
+
+INSERT INTO tb_disciplina_aluno
+	(id_aluno, id_disciplina)
+VALUES
+	(1, 1),
+	(2, 2),
+	(3, 3),
+	(4, 4),
+	(5, 5),
+	(6, 6),
+	(7, 7),
+	(8, 8),
+	(9, 9),
+	(10, 10);
