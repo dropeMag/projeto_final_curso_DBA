@@ -27,8 +27,10 @@ Os objetivos deste banco de dados são: Realizar controle centralizado de alunos
 - [Índice](#índice)
 - [Modelo Conceitual](#modelo-conceitual)
 - [Modelo Lógico](#modelo-lógico)
-- [Entidades](#entidades)
-- [Relacionamentos](#relacionamentos)
+- [Entidades Primárias](#entidades-primárias)
+- [Entidades Secundárias](#entidades-secundárias)
+- [Associativas](#associativas)
+- [Dicionário](#dicionário-de-dados)
 - [Conexão](#conexão)
 
 ---
@@ -45,7 +47,7 @@ Os objetivos deste banco de dados são: Realizar controle centralizado de alunos
 
 ---
 
-# PRINCIPAIS ENTIDADES
+# ENTIDADES PRIMÁRIAS
 
 - Aluno;
 - Curso;
@@ -57,29 +59,31 @@ Os objetivos deste banco de dados são: Realizar controle centralizado de alunos
 
 ---
 
-# RELACIONAMENTOS
+# ENTIDADES SECUNDÁRIAS
 
--	Aluno– realiza – Curso
--	Aluno– realiza – Disciplina
--	Aluno – possui – Endereco_Aluno
--	Aluno – possui – Telefone_Aluno
--	Aluno – pertence – Turma
--	Curso– pertence – Departamento
--	Curso – possui – Disciplina
--	Curso – compoe – Turma
--	Departamento – possui – Disciplina
--	Departamento – possui – Professor
--	Disciplina – exige – Disciplina
--	Disciplina – compoe – Historico
--	Disciplina – leciona – Professor
--	Endereco_Aluno – possui – Tipo_Logradouro
--	Endereco_Professor – pertence – Professor
--	Endereco_Professor – possui – Tipo_Logradouro
--	Historico – possui – Periodo
--	Periodo – possui – Turma
--	Professor – possui – Telefone_Professor
--	Tipo_Telefone – possui – Telefone_Aluno
--	Tipo_Telefone – possui – Telefone_Professor
+- Endereco_Aluno;
+- Endereco_Professor;
+- Período;
+- Telefone_Aluno;
+- Telefone_Professor;
+- Tipo_Logradouro;
+- Tipo_Telefone.
+
+---
+
+# ASSOCIATIVAS
+
+- tb_disciplina_aluno;
+- tb_discipline_curso;
+- tb_disciplina_disciplina;
+- tb_disciplina_historico;
+- tb_disciplina_professor.
+
+---
+
+# DICIONÁRIO DE DADOS
+
+Segue o [link](https://github.com/dropeMag/projeto_final_curso_DBA/wiki/Dicion%C3%A1rio-de-Dados) do Wiki para visualizar o dicionário completo.
 
 ---
 
