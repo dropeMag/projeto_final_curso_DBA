@@ -45,21 +45,14 @@ Os objetivos deste banco de dados são: Realizar controle centralizado de alunos
 
 ---
 
-# ENTIDADES
+# PRINCIPAIS ENTIDADES
 
 - Aluno;
 - Curso;
 - Departamento;
 - Disciplina;
-- Endereco_Aluno;
-- Endereco_Professor;
 - Histórico;
-- Período;
 - Professor;
-- Telefone_Aluno;
-- Telefone_Professor;
-- Tipo_Logradouro;
-- Tipo_Telefone;
 - Turma.
 
 ---
